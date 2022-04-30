@@ -1,6 +1,6 @@
 import { all, call, put, takeLatest } from '@redux-saga/core/effects'
 import { getUserFailure, getUserSuccess, UserType } from "../../actions";
-import * as types from "./../../types";
+import * as types from "../../types";
 
 let userApi: UserType;
 const userRequest = async (name: string) => {
