@@ -4,20 +4,113 @@
   box-sizing: border-box;
 }
 
+body{
+  font-family: 'Radio Canada', sans-serif;
+}
+
 .App {
   text-align: left;
   max-width: 1140px;
-  padding: 16px;
+  padding: 32px;
   margin: 0 auto;
-}
-
-h1{
-  margin-bottom: 16px;
-}
-.card-repo{
-  margin: 24px auto;
+  box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+  min-height: 100vh;
+  height: 100%;
 }
 
 ul{
   list-style: none;
 }
+
+h1{
+  margin-bottom: 16px;
+}
+
+.user-info{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar{
+  border-radius:50%;
+}
+
+
+button {
+  background-color: #222;
+  border-radius: 4px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Farfetch Basis","Helvetica Neue",Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: 0;
+  max-width: none;
+  min-height: 44px;
+  min-width: 10px;
+  outline: none;
+  overflow: hidden;
+  padding: 9px 20px 8px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-top: 32px;
+}
+
+button:hover,
+button:focus {
+  opacity: .75;
+}
+
+.repository-list{
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap:32px;
+}
+
+.repository-list ul{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  padding: 32px 0
+}
+
+
+.repository-card {
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+  cursor: pointer;
+  border: 3px solid;
+  padding: 0.25em 0.5em;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.repository-card:active {
+  box-shadow: 0px 0px 0px 0px;
+  top: 5px;
+  left: 5px;
+}
+.repository-card.selected {
+  background-color: #81ecec;
+}
+.selected-list .repository-card{
+  background-color: #ffeaa7;
+  pointer-events: none;
+}
+

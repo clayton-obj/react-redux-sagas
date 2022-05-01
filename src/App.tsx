@@ -1,16 +1,9 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import {
-  AppDispatch,
-  RootState,
-} from "./store";
-import { getRepositoryRequest, setSelectedRepositoryRequest } from "./store/ducks/repositories/actions";
+import { getRepositoryRequest } from "./store/ducks/repositories/actions";
 import { getUserRequest } from "./store/ducks/users/actions";
-import { RepositoryType } from "./store/ducks/repositories/types";
-
-const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-const useAppDispatch = () => useDispatch<AppDispatch>();
+import RepositoryCard from "./components/RepositoryCard";
+import { useAppDispatch, useAppSelector } from "./store";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -29,56 +22,38 @@ function App() {
   function handleRepositoryRequest() {
     dispatch(getRepositoryRequest("claytonrss"));
   }
-  function handleSelectRepo(repo: RepositoryType) {
-    dispatch(setSelectedRepositoryRequest(repo.id));
-  }
 
   return (
     <div className="App">
       <h1>GitHub Info</h1>
-      <div>
-        <p>{userState.name}</p>
+      <div className="user-info">
         <img
           src={userState.avatar_url}
           alt="Avatar do usuário"
           loading="lazy"
-          width="32px"
-          height="32px"
+          width="64px"
+          height="64px"
+          className="avatar"
         />
+        <p>{userState.name}</p>
       </div>
       <div>
         <button onClick={handleRepositoryRequest}>Buscar repositórios</button>
       </div>
-      <div>
+      <div className="repository-list">
         <div>
           <h3>Lista de repositórios</h3>
           <ul>
-            {repositoryState?.map((repo) => (
-              <li className="card-repo" key={repo.id}>
-                <input
-                  type="checkbox"
-                  onChange={() => handleSelectRepo(repo)}
-                />
-                <a href={repo.html_url} target="_blank" rel="noreferrer">
-                  {repo.name}
-                </a>
-              </li>
+            {repositoryState?.map((repository) => (
+              <RepositoryCard {...repository} />
             ))}
           </ul>
         </div>
         <div>
           <h3>Lista de repositórios Selecionados</h3>
-          <ul>
-            {selectedRepositoryState?.map((repo) => (
-              <li className="card-repo" key={repo.id}>
-                <input
-                  type="checkbox"
-                  onChange={() => handleSelectRepo(repo)}
-                />
-                <a href={repo.html_url} target="_blank" rel="noreferrer">
-                  {repo.name}
-                </a>
-              </li>
+          <ul className="selected-list">
+            {selectedRepositoryState?.map((repository) => (
+              <RepositoryCard {...repository} />
             ))}
           </ul>
         </div>
