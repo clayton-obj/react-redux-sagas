@@ -14,7 +14,7 @@ export function getRepositorySuccess(repositories: RepositoryType[]) {
 }
 export function getRepositoryFailure() {
   return {
-    type: RepositoryActionTypes.GET_REPOSITORY_SUCCESS,
+    type: RepositoryActionTypes.GET_REPOSITORY_FAILURE,
   };
 }
 
