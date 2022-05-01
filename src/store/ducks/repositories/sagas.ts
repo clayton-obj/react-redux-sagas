@@ -2,15 +2,14 @@ import { all, call, put, takeLatest, select } from "@redux-saga/core/effects";
 import { RootState } from "../..";
 import {
   getRepositoryFailure,
-  getRepositorySuccess,
-  RepositoryType,
+  getRepositorySuccess, 
   setSelectedRepositoryFailure,
   setSelectedRepositorySuccess,
-} from "../../actions";
-import * as types from "../../types";
+} from "./actions";
+import { RepositoryActionTypes, RepositoryType } from "./types";
 
 let repositoriesApi: RepositoryType[];
-const userRequest = async (name: string) => {
+const repositoriesRequest = async (name: string) => {
   try {
     const request = await fetch(`https://api.github.com/users/${name}/repos`);
     const response = await request.json();
@@ -22,7 +21,8 @@ const userRequest = async (name: string) => {
 
 export function* fetchRepositories(action: { type: string; payload: string }) {
   try {
-    yield call(userRequest, action.payload);
+    console.log('PASSOU')
+    yield call(repositoriesRequest, action.payload);
     yield put(getRepositorySuccess(repositoriesApi));
   } catch (e) {
     yield put(getRepositoryFailure());
@@ -57,6 +57,9 @@ export function* addSelectedRepositories(action: {
 }
 
 export default all([
-  takeLatest(types.GET_REPOSITORY_REQUEST, fetchRepositories),
-  takeLatest(types.SET_SELECTED_REPOSITORY_REQUEST, addSelectedRepositories),
+  takeLatest(RepositoryActionTypes.GET_REPOSITORY_REQUEST, fetchRepositories),
+  takeLatest(
+    RepositoryActionTypes.SET_SELECTED_REPOSITORY_REQUEST,
+    addSelectedRepositories
+  ),
 ]);

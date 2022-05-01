@@ -1,6 +1,6 @@
 import { all, call, put, takeLatest } from '@redux-saga/core/effects'
-import { getUserFailure, getUserSuccess, UserType } from "../../actions";
-import * as types from "../../types";
+import { getUserFailure, getUserSuccess,  } from "./actions";
+import { UserActionTypes, UserType } from './types';
 
 let userApi: UserType;
 const userRequest = async (name: string) => {
@@ -22,4 +22,4 @@ export function* fetchUser(action: { type: string; payload: string }) {
   }
 }
 
-export default all([takeLatest(types.GET_USER_REQUEST, fetchUser)])
+export default all([takeLatest(UserActionTypes.GET_USER_REQUEST, fetchUser)])

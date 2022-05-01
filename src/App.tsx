@@ -3,12 +3,11 @@ import "./App.css";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import {
   AppDispatch,
-  setSelectedRepositoryRequest,
-  getRepositoryRequest,
-  getUserRequest,
-  RepositoryType,
   RootState,
 } from "./store";
+import { getRepositoryRequest, setSelectedRepositoryRequest } from "./store/ducks/repositories/actions";
+import { getUserRequest } from "./store/ducks/users/actions";
+import { RepositoryType } from "./store/ducks/repositories/types";
 
 const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 const useAppDispatch = () => useDispatch<AppDispatch>();

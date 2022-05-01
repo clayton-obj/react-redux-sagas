@@ -1,30 +1,24 @@
-import { RepositoryType } from "../../actions";
-import * as types from "../../types";
+import { Reducer } from "redux";
+import { RepositoriesStateType } from "./types";
+import { RepositoryActionTypes } from "./types";
 
-interface RepositoryStateType {
-  repositories: RepositoryType[];
-  selectedRepositories: RepositoryType[];
-  loading: boolean;
-  error: boolean;
-}
-
-const INITIAL_STATE: RepositoryStateType = {
+const INITIAL_STATE: RepositoriesStateType = {
   repositories: [],
   selectedRepositories: [],
   loading: false,
   error: false,
 };
 
-export const repositoryReducer = (
+export const repositoryReducer: Reducer<RepositoriesStateType> = (
   state = INITIAL_STATE,
-  action: { type: string; payload: RepositoryType[] }
+  action
 ) => {
   switch (action.type) {
-    case types.GET_REPOSITORY_REQUEST:
+    case RepositoryActionTypes.GET_REPOSITORY_REQUEST:
       return { ...state, loading: true, error: false };
-    case types.GET_REPOSITORY_FAILURE:
+    case RepositoryActionTypes.GET_REPOSITORY_FAILURE:
       return { ...state, loading: false, error: true };
-    case types.GET_REPOSITORY_SUCCESS:
+    case RepositoryActionTypes.GET_REPOSITORY_SUCCESS:
       return {
         ...state,
         repositories: action.payload,
@@ -32,11 +26,11 @@ export const repositoryReducer = (
         error: false,
       };
 
-    case types.SET_SELECTED_REPOSITORY_REQUEST:
+    case RepositoryActionTypes.SET_SELECTED_REPOSITORY_REQUEST:
       return { ...state, loading: true, error: false };
-    case types.SET_SELECTED_REPOSITORY_FAILURE:
+    case RepositoryActionTypes.SET_SELECTED_REPOSITORY_FAILURE:
       return { ...state, loading: false, error: true };
-    case types.SET_SELECTED_REPOSITORY_SUCCESS:
+    case RepositoryActionTypes.SET_SELECTED_REPOSITORY_SUCCESS:
       return {
         ...state,
         selectedRepositories: action.payload,

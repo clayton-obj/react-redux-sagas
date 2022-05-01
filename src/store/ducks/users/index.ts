@@ -1,13 +1,8 @@
-import { UserType } from "../../actions";
-import * as types from "../../types";
+import { UserType, UsersStateType, UserActionTypes } from "./types";
 
-interface UserStateType {
-  user: UserType;
-  loading: boolean;
-  error: boolean;
-}
 
-const INITIAL_STATE: UserStateType = {
+
+const INITIAL_STATE: UsersStateType = {
   user: {
     name: "",
     avatar_url: "",
@@ -21,11 +16,11 @@ export const userReducer = (
   action: { type: string; payload: UserType }
 ) => {
   switch (action.type) {
-    case types.GET_USER_REQUEST:
+    case UserActionTypes.GET_USER_REQUEST:
       return { ...state, loading: true, error: false };
-    case types.GET_USER_FAILURE:
+    case UserActionTypes.GET_USER_FAILURE:
       return { ...state, loading: false, error: true };
-    case types.GET_USER_SUCCESS:
+    case UserActionTypes.GET_USER_SUCCESS:
       return { ...state, user: action.payload, loading: false, error: false };
     default:
       return state;
